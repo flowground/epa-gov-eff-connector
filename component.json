@@ -1,0 +1,170 @@
+{
+    "title": "U.S. EPA Enforcement and Compliance History Online (ECHO) - Effluent Charting and Reporting",
+    "description": "Enforcement and Compliance History Online (ECHO) is a tool developed and maintained by EPA's Office of Enforcement and Compliance Assurance for public use.\nECHO provides integrated compliance and enforcement information for about 800,000 regulated facilities nationwide.\n<BR><BR>EFF Rest Services provides the data for ECHO's Effluent Charts, a set of dynamic charts and tables of permitted effluent limits, releases, and violations over time for \nClean Water Act (CWA) wastewater discharge permits issued under the National Pollutant Discharge Elimination System (NPDES).  See Effluent Charts Help (https://echo.epa.gov/help/reports/effluent-charts-help) for additional information.\n<BR><BR>\nThe are 3 service end points for Efffluent Charts:  get_summary_chart, get_effluent_chart, and download_effluent_chart.\n<br>\n<br><b>1)</b>  Use get_summary_chart to retrieve a summary matrix of effluent parameters by effluent outfall and an overall violation status for a provided NPDES Permit and date range.\n<br><b>2)</b>  Use get_effluent_chart to retrieve detailed Discharge Limit, DMR and NPDES Violation information for a provided NPDES Permit, date range, effluent paramater, or outfall.\n<br><b>3)</b>  Use download_effluent_chart to generate a Comma Separated Value (CSV) file of the detailed data provided with get_effluent chart, for a provided NPDES Permit, date range, effluent paramater, or outfall.\n<br>\n<br>\nAdditional ECHO Resources:   <a href=\"https://echo.epa.gov/tools/web-services\">Web Services</a>, <a href=\"https://echo.epa.gov/resources/echo-data/about-the-data\">About ECHO's Data</a>, <a href=\"https://echo.epa.gov/tools/data-downloads\">Data Downloads</a>\n<br>",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/epa.gov/eff/1.0.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://ofmpub.epa.gov/echo",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_eff_rest_services_download_effluent_chart": {
+            "main": "./lib/actions/get_eff_rest_services_download_effluent_chart.js",
+            "title": "Effluent Charts Download Service",
+            "description": "Downloads tabular Discharge Monitoring Report (DMR) and compliance data for one NPDES permit as a CSV.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_eff_rest_services_download_effluent_chart.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_eff_rest_services_download_effluent_chart": {
+            "main": "./lib/actions/post_eff_rest_services_download_effluent_chart.js",
+            "title": "Effluent Charts Download Service",
+            "description": "Downloads tabular Discharge Monitoring Report (DMR) and compliance data for one NPDES permit as a CSV.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_eff_rest_services_download_effluent_chart.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_eff_rest_services_get_effluent_chart": {
+            "main": "./lib/actions/get_eff_rest_services_get_effluent_chart.js",
+            "title": "Detailed Effluent Chart Service",
+            "description": "Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. \n\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_eff_rest_services_get_effluent_chart.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_eff_rest_services_get_effluent_chart": {
+            "main": "./lib/actions/post_eff_rest_services_get_effluent_chart.js",
+            "title": "Detailed Effluent Chart Service",
+            "description": "Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. \n\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_eff_rest_services_get_effluent_chart.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_eff_rest_services_get_summary_chart": {
+            "main": "./lib/actions/get_eff_rest_services_get_summary_chart.js",
+            "title": "Summary Effluent Chart Service",
+            "description": "Summary of compliance status each outfall and parameter for one NPDES permit. Provides the current compliance status and overall compliance status for the date range of interest. This service supports the Summary Matrix on the Effluent Charts.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_eff_rest_services_get_summary_chart.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_eff_rest_services_get_summary_chart": {
+            "main": "./lib/actions/post_eff_rest_services_get_summary_chart.js",
+            "title": "Summary Effluent Chart Service",
+            "description": "Summary of compliance status each outfall and parameter for one NPDES permit. Provides the current compliance status and overall compliance status for the date range of interest. This service supports the Summary Matrix on the Effluent Charts.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_eff_rest_services_get_summary_chart.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_rest_lookups_cwa_parameters": {
+            "main": "./lib/actions/get_rest_lookups_cwa_parameters.js",
+            "title": "ECHO CWA Parameter Lookup Service",
+            "description": "Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_rest_lookups_cwa_parameters.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_rest_lookups_cwa_parameters": {
+            "main": "./lib/actions/post_rest_lookups_cwa_parameters.js",
+            "title": "ECHO CWA Parameter Lookup Service",
+            "description": "Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_rest_lookups_cwa_parameters.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
